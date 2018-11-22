@@ -7,7 +7,7 @@ for f in $*
 do
     timestamp=$(stat -c %y "$f")
     timestamp=$(echo $timestamp | sed 's/ +....//g' | sed 's/ /_/g' | sed -E 's/(:..\....)(.*)/\1/g')
-    echo $timestamp
+
     f_basename=$(basename "$f")
     f_dirname=$(dirname "$f")
     f_extension=${f_basename##*.}
@@ -21,8 +21,10 @@ do
         f_basename=$(basename $f ".$f_extension")
         new_filename="${f_dirname}/${f_basename}_$timestamp.${f_extension}"
     fi
-    echo $new_filename
     
-    #cp $f
+    # echo $timestamp
+    # echo $new_filename
+        
+    cp "$f" "${new_filename}"
 done
 
